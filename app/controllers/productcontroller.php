@@ -17,16 +17,21 @@ class ProductController extends Controller
 
     public function getAll()
     {
-        // this code seems to have been lost
+        $this->respond($this->service->getAll());
     }
 
     public function getOne($id)
     {
+       
+     
         $product = $this->service->getOne($id);
 
-        // we might need some kind of error checking that returns a 404 if the product is not found in the DB
+        $product == null ?  $this->respond($product) :       
+        $this->respondWithError(404, "Product Not Found");
+       
 
-        $this->respond($product);
+    
+
     }
 
     public function create()
